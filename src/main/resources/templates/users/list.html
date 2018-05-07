@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:replace="~{common/header :: header}"></div>
+
+<h3 th:text="${userModel.title}"></h3>
+
+<div>
+    <a href="/users/form.html" th:href="@{~/users/form}">创建</a>
+</div>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:if="${#lists.isEmpty(userModel.userList)}">
+            <td colspan="3">无用户信息！</td>
+        </tr>
+        <tr th:each="user : ${userModel.userList}">
+            <td th:text="${user.id}"></td>
+            <td><a th:href="@{'~/users/' + ${user.id}}" th:text="${user.name}"></a></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<div th:replace="~{common/footer :: footer}"></div>
+
+</body>
+</html>
